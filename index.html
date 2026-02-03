@@ -184,10 +184,6 @@
       border-color: var(--cyan-600);
     }
 
-    .feature-icon {
-      font-size: 2rem;
-      margin-bottom: 16px;
-    }
 
     .feature-card h3 {
       font-size: 1.25rem;
@@ -260,6 +256,52 @@
       display: block;
     }
 
+    /* Screenshot */
+    .hero-screenshot {
+      margin-top: 60px;
+      position: relative;
+    }
+
+    .hero-screenshot img {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 12px;
+      border: 1px solid var(--bg-card);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-screenshot::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, var(--cyan-500) 0%, transparent 50%);
+      border-radius: 13px;
+      z-index: -1;
+      opacity: 0.3;
+    }
+
+    /* Feature Icons */
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      border-radius: 12px;
+    }
+
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--cyan-400);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     /* Responsive */
     @media (max-width: 640px) {
       .hero {
@@ -294,7 +336,7 @@
       <p>Capture, filter, and search console logs across browser sessions. Your debug history, always available.</p>
 
       <!-- Email Signup Form -->
-      <form class="email-form" id="waitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <form class="email-form" id="waitlistForm" action="https://formspree.io/f/mvzqnonq" method="POST">
         <input
           type="email"
           name="email"
@@ -310,31 +352,44 @@
       <div class="success-message" id="successMessage">
         ✅ You're on the list! We'll notify you when Devtrace launches.
       </div>
+
+      <!-- Product Screenshot -->
+      <div class="hero-screenshot">
+        <img src="screenshot.png" alt="Devtrace DevTools panel showing filtered console logs">
+      </div>
     </section>
 
     <!-- Features -->
     <section class="features">
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-icon">💾</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          </div>
           <h3>Persistent Storage</h3>
           <p>Logs survive browser restarts. Pick up right where you left off, even days later.</p>
         </div>
 
         <div class="feature-card">
-          <div class="feature-icon">🔍</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
           <h3>Search & Filter</h3>
           <p>Find that needle in the haystack. Filter by level, search by content, instantly.</p>
         </div>
 
         <div class="feature-card">
-          <div class="feature-icon">📊</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+          </div>
           <h3>All Log Types</h3>
           <p>Captures log, warn, error, info, debug — plus uncaught errors and promise rejections.</p>
         </div>
 
         <div class="feature-card">
-          <div class="feature-icon">⬇️</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
           <h3>Export Anytime</h3>
           <p>Download your logs as JSON. Share with your team or save for later analysis.</p>
         </div>
@@ -346,7 +401,7 @@
       <div class="cta-box">
         <h2>Built for developers who debug</h2>
         <p>Stop losing valuable console output. Start tracing with confidence.</p>
-        <form class="email-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <form class="email-form" action="https://formspree.io/f/mvzqnonq" method="POST">
           <input
             type="email"
             name="email"
@@ -362,8 +417,7 @@
     <!-- Footer -->
     <footer>
       <p>
-        Built by <a href="https://twitter.com/YOUR_HANDLE" target="_blank">Sean</a> ·
-        <a href="/privacy">Privacy</a>
+        © 2026 Devtrace · <a href="/privacy">Privacy</a> · <a href="mailto:hello@devtrace.dev">Contact</a>
       </p>
     </footer>
   </div>
