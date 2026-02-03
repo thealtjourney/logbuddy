@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devtrace — Never Lose a Console Log Again</title>
+  <meta name="description" content="Capture, filter, and search console logs across browser sessions. The Chrome DevTools extension for developers who debug.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Devtrace — Never Lose a Console Log Again">
+  <meta property="og:description" content="Capture, filter, and search console logs across browser sessions.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/icon.png">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --cyan-400: #22d3ee;
+      --cyan-500: #06b6d4;
+      --cyan-600: #0891b2;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 24px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 100px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-card);
+      border-radius: 50px;
+      font-size: 0.875rem;
+      color: var(--cyan-400);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--cyan-400) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    /* Email Form */
+    .email-form {
+      display: flex;
+      gap: 12px;
+      max-width: 480px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .email-form input[type="email"] {
+      flex: 1;
+      min-width: 250px;
+      padding: 16px 20px;
+      border: 2px solid var(--bg-card);
+      border-radius: 12px;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .email-form input[type="email"]:focus {
+      border-color: var(--cyan-500);
+    }
+
+    .email-form input[type="email"]::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .email-form button {
+      padding: 16px 32px;
+      background: var(--cyan-500);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .email-form button:hover {
+      background: var(--cyan-400);
+    }
+
+    .email-form button:active {
+      transform: scale(0.98);
+    }
+
+    .form-note {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 16px;
+    }
+
+    /* Features */
+    .features {
+      padding: 80px 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      padding: 32px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-card);
+      border-radius: 16px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--cyan-600);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* CTA Section */
+    .cta {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .cta-box {
+      padding: 60px 40px;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+      border-radius: 24px;
+      border: 1px solid var(--bg-card);
+    }
+
+    .cta h2 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .cta p {
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--bg-secondary);
+      text-align: center;
+    }
+
+    footer p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: var(--cyan-400);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Success State */
+    .success-message {
+      display: none;
+      padding: 20px;
+      background: var(--bg-secondary);
+      border: 2px solid var(--cyan-500);
+      border-radius: 12px;
+      color: var(--cyan-400);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero {
+        padding: 60px 0 80px;
+      }
+
+      .email-form {
+        flex-direction: column;
+      }
+
+      .email-form input[type="email"],
+      .email-form button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <a href="/" class="logo">
+        <img src="icon.png" alt="Devtrace">
+        Devtrace
+      </a>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <span class="hero-badge">🚀 Coming soon to Chrome Web Store</span>
+      <h1>Never lose a console log again</h1>
+      <p>Capture, filter, and search console logs across browser sessions. Your debug history, always available.</p>
+
+      <!-- Email Signup Form -->
+      <form class="email-form" id="waitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input
+          type="email"
+          name="email"
+          placeholder="you@example.com"
+          required
+          autocomplete="email"
+        >
+        <button type="submit">Join Waitlist</button>
+      </form>
+      <p class="form-note">Be the first to know when we launch. No spam, ever.</p>
+
+      <!-- Success Message (shown after signup) -->
+      <div class="success-message" id="successMessage">
+        ✅ You're on the list! We'll notify you when Devtrace launches.
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">💾</div>
+          <h3>Persistent Storage</h3>
+          <p>Logs survive browser restarts. Pick up right where you left off, even days later.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3>Search & Filter</h3>
+          <p>Find that needle in the haystack. Filter by level, search by content, instantly.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>All Log Types</h3>
+          <p>Captures log, warn, error, info, debug — plus uncaught errors and promise rejections.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⬇️</div>
+          <h3>Export Anytime</h3>
+          <p>Download your logs as JSON. Share with your team or save for later analysis.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="cta-box">
+        <h2>Built for developers who debug</h2>
+        <p>Stop losing valuable console output. Start tracing with confidence.</p>
+        <form class="email-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            required
+            autocomplete="email"
+          >
+          <button type="submit">Get Early Access</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        Built by <a href="https://twitter.com/YOUR_HANDLE" target="_blank">Sean</a> ·
+        <a href="/privacy">Privacy</a>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // Handle form submission (works with Formspree or similar)
+    document.querySelectorAll('.email-form').forEach(form => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const email = formData.get('email');
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (response.ok) {
+            // Show success message
+            const successMsg = document.getElementById('successMessage');
+            if (successMsg) {
+              form.style.display = 'none';
+              successMsg.classList.add('show');
+            }
+            form.reset();
+          }
+        } catch (error) {
+          console.error('Form submission error:', error);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

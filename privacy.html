@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Devtrace</title>
+  <link rel="icon" type="image/png" href="/icon.png">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --cyan-400: #22d3ee;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--cyan-400);
+      text-decoration: none;
+      margin-bottom: 40px;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+
+    .last-updated {
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 40px 0 16px;
+      color: var(--text-primary);
+    }
+
+    p, li {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    ul {
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    strong {
+      color: var(--text-primary);
+    }
+
+    a {
+      color: var(--cyan-400);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="back-link">← Back to Devtrace</a>
+
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last updated: February 2026</p>
+
+    <h2>Overview</h2>
+    <p>Devtrace is a Chrome DevTools extension that captures and stores console logs locally on your device. We are committed to protecting your privacy and being transparent about our practices.</p>
+
+    <h2>What Data We Collect</h2>
+
+    <h3 style="font-size: 1.1rem; margin-top: 24px; color: var(--text-primary);">The Extension</h3>
+    <p><strong>Devtrace does not collect, transmit, or share any of your data.</strong></p>
+    <ul>
+      <li>All console logs are stored <strong>locally</strong> on your device using IndexedDB</li>
+      <li>No data is sent to our servers or any third parties</li>
+      <li>We do not track your browsing activity</li>
+      <li>We do not collect analytics or usage data</li>
+      <li>We have no access to your logs or any information about what websites you visit</li>
+    </ul>
+
+    <h3 style="font-size: 1.1rem; margin-top: 24px; color: var(--text-primary);">This Website</h3>
+    <p>If you sign up for our waitlist:</p>
+    <ul>
+      <li>We collect your <strong>email address</strong> only</li>
+      <li>We use this solely to notify you about Devtrace updates and launch</li>
+      <li>We will never sell or share your email with third parties</li>
+      <li>You can unsubscribe at any time</li>
+    </ul>
+
+    <h2>Data Storage</h2>
+    <p>Console logs captured by Devtrace are stored in your browser's IndexedDB storage. This data:</p>
+    <ul>
+      <li>Stays on your local device</li>
+      <li>Is not synced to any cloud service</li>
+      <li>Can be cleared at any time using the "Clear" button in the extension</li>
+      <li>Is automatically deleted if you uninstall the extension</li>
+    </ul>
+
+    <h2>Permissions</h2>
+    <p>Devtrace requires the following Chrome permissions:</p>
+    <ul>
+      <li><strong>storage</strong> — To save your log data locally</li>
+      <li><strong>activeTab</strong> — To capture console output from the current tab</li>
+      <li><strong>scripting</strong> — To inject the console capture script</li>
+      <li><strong>alarms</strong> — To keep the service worker active for log persistence</li>
+      <li><strong>host_permissions (all_urls)</strong> — To capture logs from any website you choose to debug</li>
+    </ul>
+
+    <h2>Third-Party Services</h2>
+    <p>The extension itself uses <strong>no third-party services</strong>.</p>
+    <p>This website uses Formspree to handle email signups. Their privacy policy can be found at <a href="https://formspree.io/legal/privacy-policy" target="_blank">formspree.io/legal/privacy-policy</a>.</p>
+
+    <h2>Changes to This Policy</h2>
+    <p>We may update this privacy policy from time to time. We will notify users of any material changes by updating the "Last updated" date at the top of this page.</p>
+
+    <h2>Contact</h2>
+    <p>If you have questions about this privacy policy or Devtrace, please contact us at <a href="mailto:hello@devtrace.dev">hello@devtrace.dev</a>.</p>
+
+    <p style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--bg-secondary);">
+      <a href="/">← Back to Devtrace</a>
+    </p>
+  </div>
+</body>
+</html>
